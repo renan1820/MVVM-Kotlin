@@ -1,5 +1,6 @@
 package git.portifilio.renan.mvvm.presentantion.activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -47,7 +48,7 @@ class MainActivityBlog : AppCompatActivity() {
         })
     }
 
-
+    @SuppressLint("WrongViewCast", "NotifyDataSetChanged")
     fun addData(){
         var txtplce = findViewById<EditText>(R.id.titletxt)
         var title=txtplce.text.toString()
