@@ -26,7 +26,6 @@ class MainActivityBlog : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_blog)
         mainrecycler = findViewById(R.id.recycler)
-        val application = requireNotNull(this).application
         val factory = MainViewModelFactory()
         viewModel = ViewModelProvider(this,factory).get(MainViewModel::class.java)
         but = findViewById(R.id.button)
@@ -43,23 +42,21 @@ class MainActivityBlog : AppCompatActivity() {
 
     fun observeData(){
         viewModel.lst.observe(this, Observer{
-            Log.i("data",it.toString())
             mainrecycler.adapter= NoteRecyclerAdapter(viewModel, it, this)
         })
     }
 
-    @SuppressLint("WrongViewCast", "NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged")
     fun addData(){
-        var txtplce = findViewById<EditText>(R.id.titletxt)
-        var title=txtplce.text.toString()
-        if(title.isNullOrBlank()){
-            Toast.makeText(this,"Enter value!",Toast.LENGTH_LONG).show()
+        val txtplce = findViewById<EditText>(R.id.titletxt)
+        val title = txtplce.text.toString()
+        if(title.isBlank()){
+            Toast.makeText(this,"Preencha com um nome",Toast.LENGTH_LONG).show()
         }else{
-            var blog= Blog(title)
+            val blog= Blog(title)
             viewModel.add(blog)
             txtplce.text.clear()
             mainrecycler.adapter?.notifyDataSetChanged()
         }
-
     }
 }

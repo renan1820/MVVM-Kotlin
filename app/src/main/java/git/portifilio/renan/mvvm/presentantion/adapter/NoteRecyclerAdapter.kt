@@ -17,8 +17,7 @@ class NoteRecyclerAdapter(val viewModel: MainViewModel, val arrayList: ArrayList
         parent: ViewGroup,
         viewType: Int,
     ): NotesViewHolder {
-        var root = LayoutInflater.from(parent.context).inflate(R.layout.item,parent,false)
-        return NotesViewHolder(root)
+        return NotesViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item,parent,false))
     }
 
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
@@ -28,8 +27,6 @@ class NoteRecyclerAdapter(val viewModel: MainViewModel, val arrayList: ArrayList
     override fun getItemCount(): Int {
         if(arrayList.size==0){
             Toast.makeText(context,"Item Removido",Toast.LENGTH_LONG).show()
-        }else{
-
         }
         return arrayList.size
     }
