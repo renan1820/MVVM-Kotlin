@@ -1,13 +1,10 @@
 package git.portifilio.renan.mvvm.presentantion.activity
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,23 +37,22 @@ class MainActivityBlog : AppCompatActivity() {
         observeData()
     }
 
-    fun observeData(){
-        viewModel.lst.observe(this, Observer{
-            mainrecycler.adapter= NoteRecyclerAdapter(viewModel, it, this)
-        })
+    private fun observeData(){
+        viewModel.lst.observe(this){ list ->
+            mainrecycler.adapter = NoteRecyclerAdapter(viewModel, list, this)
+        }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun addData(){
+    private fun addData(){
         val txtplce = findViewById<EditText>(R.id.titletxt)
         val title = txtplce.text.toString()
         if(title.isBlank()){
             Toast.makeText(this,"Preencha com um nome",Toast.LENGTH_LONG).show()
         }else{
             val blog= Blog(title)
-            viewModel.add(blog)
+            viewModel.addList(blog)
             txtplce.text.clear()
-            mainrecycler.adapter?.notifyDataSetChanged()
+            mainrecycler.let { it.adapter?.notifyItemInserted(viewModel.getSizeList())}
         }
     }
 }

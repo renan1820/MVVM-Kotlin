@@ -12,7 +12,7 @@ import git.portifilio.renan.mvvm.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.item.view.*
 
 
-class NoteRecyclerAdapter(val viewModel: MainViewModel, val arrayList: ArrayList<Blog>, val context: Context): RecyclerView.Adapter<NoteRecyclerAdapter.NotesViewHolder>() {
+class NoteRecyclerAdapter(val viewModel: MainViewModel, val arrayList: ArrayList<Blog>, private val context: Context): RecyclerView.Adapter<NoteRecyclerAdapter.NotesViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -21,7 +21,7 @@ class NoteRecyclerAdapter(val viewModel: MainViewModel, val arrayList: ArrayList
     }
 
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
-        holder.bind(arrayList.get(position))
+        holder.bind(arrayList[position])
     }
 
     override fun getItemCount(): Int {
@@ -36,7 +36,7 @@ class NoteRecyclerAdapter(val viewModel: MainViewModel, val arrayList: ArrayList
         fun bind(blog: Blog){
             binding.title.text = blog.title
             binding.delete.setOnClickListener {
-                viewModel.remove(blog)
+                viewModel.removeList(blog)
                 notifyItemRemoved(arrayList.indexOf(blog))
             }
         }
