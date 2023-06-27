@@ -4,12 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import git.portifilio.renan.mvvm.model.Blog
 import git.portifilio.renan.mvvm.R
 import git.portifilio.renan.mvvm.viewmodel.MainViewModel
-import kotlinx.android.synthetic.main.item.view.*
 
 
 class NoteRecyclerAdapter(val viewModel: MainViewModel, val arrayList: ArrayList<Blog>, private val context: Context): RecyclerView.Adapter<NoteRecyclerAdapter.NotesViewHolder>() {
@@ -34,8 +35,8 @@ class NoteRecyclerAdapter(val viewModel: MainViewModel, val arrayList: ArrayList
 
     inner  class NotesViewHolder(private val binding: View) : RecyclerView.ViewHolder(binding) {
         fun bind(blog: Blog){
-            binding.title.text = blog.title
-            binding.delete.setOnClickListener {
+            binding.findViewById<TextView>(R.id.title).text = blog.title
+            binding.findViewById<Button>(R.id.delete).setOnClickListener {
                 viewModel.removeList(blog)
                 notifyItemRemoved(arrayList.indexOf(blog))
             }
