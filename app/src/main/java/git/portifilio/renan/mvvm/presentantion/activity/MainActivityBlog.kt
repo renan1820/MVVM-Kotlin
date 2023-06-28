@@ -1,5 +1,6 @@
 package git.portifilio.renan.mvvm.presentantion.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -24,7 +25,7 @@ class MainActivityBlog : AppCompatActivity() {
         setContentView(R.layout.activity_main_blog)
         mainrecycler = findViewById(R.id.recycler)
         val factory = MainViewModelFactory()
-        viewModel = ViewModelProvider(this,factory).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this,factory)[MainViewModel::class.java]
         but = findViewById(R.id.button)
         but.setOnClickListener {
             addData()
@@ -54,5 +55,9 @@ class MainActivityBlog : AppCompatActivity() {
             txtplce.text.clear()
             mainrecycler.let { it.adapter?.notifyItemInserted(viewModel.getSizeList())}
         }
+    }
+
+    fun navigate(intent: Intent){
+        startActivity(intent)
     }
 }

@@ -1,15 +1,18 @@
 package git.portifilio.renan.mvvm.presentantion.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import git.portifilio.renan.mvvm.model.Blog
 import git.portifilio.renan.mvvm.R
+import git.portifilio.renan.mvvm.presentantion.compose.NoteDetails
 import git.portifilio.renan.mvvm.viewmodel.MainViewModel
 
 
@@ -39,6 +42,9 @@ class NoteRecyclerAdapter(val viewModel: MainViewModel, val arrayList: ArrayList
             binding.findViewById<Button>(R.id.delete).setOnClickListener {
                 viewModel.removeList(blog)
                 notifyItemRemoved(arrayList.indexOf(blog))
+            }
+            binding.findViewById<ConstraintLayout>(R.id.constraint).setOnClickListener{
+                context.startActivity(Intent(context,NoteDetails::class.java))
             }
         }
 

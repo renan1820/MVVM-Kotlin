@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="60dp"
     tools:viewBindingIgnore="true"
+    android:id="@+id/constraint"
     tools:context=".MainActivity">
 
     <TextView

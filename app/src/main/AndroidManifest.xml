@@ -8,7 +8,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MVVM">
-        <activity android:name=".presentantion.activity.MainActivityBlog"
+        <activity
+            android:name=".presentantion.compose.NoteDetails"
+            android:exported="false"
+            android:label="Notas"
+            android:theme="@style/Theme.MVVM" />
+        <activity
+            android:name=".presentantion.activity.MainActivityBlog"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
